@@ -19,6 +19,12 @@ export class AttractionService {
     return data as Observable<AttractionInterface[]>;
   }
 
+  public getAllVisibleAttraction() : Observable<AttractionInterface[]> {
+    const url = "http://127.0.0.1:5000/visible_attraction"
+    const data = this.dataService.getData(url);
+    return data as Observable<AttractionInterface[]>;
+  }
+
   public postAttraction(attraction: AttractionInterface): Observable<MessageInterface> {
     const url = "http://127.0.0.1:5000/attraction";
     const data = this.dataService.postData(url, attraction);
