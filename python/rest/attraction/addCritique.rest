@@ -1,0 +1,11 @@
+POST http://127.0.0.1:5000/attraction/critique HTTP/1.1
+Content-Type: application/json
+
+{
+  "critique_id": 1,
+  "name": "test6aaaaaaaaaaaaaaaaaaaaa",
+  "text": "test",
+  "rating": 8,
+  "attraction_id": 1
+}
+

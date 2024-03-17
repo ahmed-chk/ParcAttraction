@@ -49,10 +49,29 @@ def deleteAttraction(index):
     checkToken = user.check_token(request)
     if (checkToken != True):
         return checkToken
-
-    json = request.get_json()
     
     if (attraction.delete_attraction(index)):
+        return "Element supprimé.", 200
+    return jsonify({"message": "Erreur lors de la suppression."}), 500
+
+@app.get('/attraction/<int:index>/critiques')
+def getCritiques(index):
+    result = attraction.get_critiques(index)
+    return result, 200
+
+@app.post('/attraction/critique')
+def addCritique():
+    print("okok", flush=True)
+
+    json = request.get_json()
+    retour = attraction.add_critique(json)
+    if (retour):
+        return jsonify({"message": "Element ajouté.", "result": retour}), 200
+    return jsonify({"message": "Erreur lors de l'ajout.", "result": retour}), 500
+
+@app.delete('/attraction/critique/<int:index>')
+def deleteCritique(index):
+    if (attraction.delete_critique(index)):
         return "Element supprimé.", 200
     return jsonify({"message": "Erreur lors de la suppression."}), 500
 

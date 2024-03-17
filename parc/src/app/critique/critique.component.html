@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Critiques de l'attraction <button mat-button (click)="addCritique()">Ajouter</button> </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="critique-title">
+      <div class="critique">
+        <span>Nom</span>
+        <span>Texte</span>
+        <span>Note / 10</span>
+      </div>
+    </div>
+    <ng-container *ngFor="let critique of critiques | async;">
+      <div class="critique">
+        <span>{{critique.name}}</span>
+        <span>{{critique.text}}</span>
+        <span>{{critique.rating}} / 10</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="critiques | async">
+      <ng-container *ngFor="let formulaireCritique of formulaireCritiques; let indexForm = index;"
+        [formGroup]="formulaireCritique"
+        style="display: flex; flex-direction: column;"
+      >
+        <div class="critique">
+          <span>
+            <mat-form-field class="champ" appearance="fill">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+          </span>
+          
+          <span>
+            <mat-form-field class="champ" appearance="fill">
+              <mat-label>Texte</mat-label>
+              <input matInput formControlName="text">
+            </mat-form-field>
+          </span>
+
+          <span>
+            <mat-form-field class="champ" appearance="fill">
+              <mat-label>Note / 10</mat-label>
+              <input matInput formControlName="rating" type="number" min="0" max="10">
+            </mat-form-field>
+          </span>
+          
+          <button mat-button (click)="onSubmit(formulaireCritique)" class="champ">Enregistrer</button>
+        </div>
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
